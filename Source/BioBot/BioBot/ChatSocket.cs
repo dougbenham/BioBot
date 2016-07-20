@@ -665,7 +665,7 @@ namespace BioBot
             {
                 bncsPacket.InsertDwordString("D2DV");
             }
-            bncsPacket.InsertInt32(13); // TODO: here
+            bncsPacket.InsertInt32(BattleNetClient.g_bVerbyte);
             bncsPacket.InsertInt32(CultureInfo.CurrentUICulture.LCID);
             bncsPacket.InsertInt32(16777343);
             bncsPacket.InsertInt32(checked((int) Math.Round(DateTime.UtcNow.Subtract(DateTime.Now).TotalMinutes)));

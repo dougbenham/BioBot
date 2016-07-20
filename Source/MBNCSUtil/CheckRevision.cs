@@ -195,8 +195,6 @@ namespace BNSharp.MBNCSUtil
                 throw new ArgumentNullException("valueString", Resources.crValstringNull);
             if (files == null)
                 throw new ArgumentNullException("files", Resources.crFileListNull);
-            if (files.Length != 3)
-                throw new ArgumentOutOfRangeException("files", files, Resources.crFileListInvalid);
             if (mpqNumber < 0 || mpqNumber > 7)
                 throw new ArgumentOutOfRangeException("mpqNumber", mpqNumber, "MPQ number must be between 0 and 7, inclusive.");
 

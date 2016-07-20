@@ -14,7 +14,7 @@ namespace BioBot
 
 		public string[] g_sHashes;
 
-		public const byte g_bVerbyte = 13;
+		public const byte g_bVerbyte = 14;
 
 		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
 		public BattleNetClient(bool Exp = false)
@@ -34,9 +34,7 @@ namespace BioBot
 			}
 			this.g_sHashes = new string[]
 			{
-				this.g_sHashPath + "Game.exe",
-				this.g_sHashPath + "Bnclient.dll",
-				this.g_sHashPath + "D2Client.dll"
+				this.g_sHashPath + "Game.exe"
 			};
 		}
 
