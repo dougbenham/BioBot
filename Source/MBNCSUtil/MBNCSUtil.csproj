@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{A28D66FB-D893-46EE-9CF2-CECD13756922}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>MBNCSUtil</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MBNCSUtil.Data\Blp1ImageType.cs" />
+    <Compile Include="MBNCSUtil.Data\Blp1Parser.cs" />
+    <Compile Include="MBNCSUtil.Data\Blp2CompressionType.cs" />
+    <Compile Include="MBNCSUtil.Data\Blp2Parser.cs" />
+    <Compile Include="MBNCSUtil.Data\BniFileParser.cs" />
+    <Compile Include="MBNCSUtil.Data\BniIcon.cs" />
+    <Compile Include="MBNCSUtil.Data\DXTCFormat.cs" />
+    <Compile Include="MBNCSUtil.Data\ImageParser.cs" />
+    <Compile Include="MBNCSUtil.Data\LateBoundStormDllApi.cs" />
+    <Compile Include="MBNCSUtil.Data\MpqArchive.cs" />
+    <Compile Include="MBNCSUtil.Data\MpqErrorCodes.cs" />
+    <Compile Include="MBNCSUtil.Data\MpqException.cs" />
+    <Compile Include="MBNCSUtil.Data\MpqFileStream.cs" />
+    <Compile Include="MBNCSUtil.Data\MpqServices.cs" />
+    <Compile Include="MBNCSUtil.Data\NativeMethods.cs" />
+    <Compile Include="MBNCSUtil.Data\SearchType.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileCloseArchiveCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileCloseFileCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileGetFileSizeCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileHasFileCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileOpenArchiveCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileOpenFileCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileOpenFileExCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileReadFileCallback.cs" />
+    <Compile Include="MBNCSUtil.Data\SFileSetFilePointerCallback.cs" />
+    <Compile Include="MBNCSUtil.Net\BnFtpRequestBase.cs" />
+    <Compile Include="MBNCSUtil.Net\BnFtpVersion1Request.cs" />
+    <Compile Include="MBNCSUtil.Net\BnFtpVersion2Request.cs" />
+    <Compile Include="MBNCSUtil.Net\DownloadStatusEventArgs.cs" />
+    <Compile Include="MBNCSUtil.Net\DownloadStatusEventHandler.cs" />
+    <Compile Include="MBNCSUtil.Util\AllocMethod.cs" />
+    <Compile Include="MBNCSUtil.Util\BigInteger.cs" />
+    <Compile Include="MBNCSUtil.Util\HeapPtr.cs" />
+    <Compile Include="MBNCSUtil.Util\LockdownCrev.cs" />
+    <Compile Include="MBNCSUtil.Util\LockdownHeap.cs" />
+    <Compile Include="MBNCSUtil.Util\LockdownSha1.cs" />
+    <Compile Include="MBNCSUtil.Util\Native.cs" />
+    <Compile Include="MBNCSUtil.Util\PeFileLoader.cs" />
+    <Compile Include="MBNCSUtil.Util\PeFileReader.cs" />
+    <Compile Include="MBNCSUtil\BncsPacket.cs" />
+    <Compile Include="MBNCSUtil\BncsReader.cs" />
+    <Compile Include="MBNCSUtil\CdKey.cs" />
+    <Compile Include="MBNCSUtil\CheckRevision.cs" />
+    <Compile Include="MBNCSUtil\DataBuffer.cs" />
+    <Compile Include="MBNCSUtil\DataFormatter.cs" />
+    <Compile Include="MBNCSUtil\DataReader.cs" />
+    <Compile Include="MBNCSUtil\NLS.cs" />
+    <Compile Include="MBNCSUtil\OldAuth.cs" />
+    <Compile Include="MBNCSUtil\Resources.cs" />
+    <Compile Include="MBNCSUtil\XSha1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MBNCSUtil\Resources.resources" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

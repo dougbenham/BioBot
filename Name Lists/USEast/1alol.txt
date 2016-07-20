@@ -1,0 +1,6 @@
+Hvh|Sorc|Class|Soft|Non
+Angelic|Sorc|Class|Soft|Non
+Lynx|Sorc|Class|Soft|Non
+Geek|Sorc|Class|Soft|Non
+Leak|Sorc|Class|Soft|Non
+Warriv|Sorc|Class|Soft|Non

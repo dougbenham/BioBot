@@ -1,0 +1,18 @@
+Monster|Nec|Class|Soft|Non
+Moo|Nec|Class|Soft|Non
+Moon|Nec|Class|Soft|Non
+Moose|Nec|Class|Soft|Non
+Moral|Nec|Class|Soft|Non
+Mother|Nec|Class|Soft|Non
+Mountain|Nec|Class|Soft|Non
+Mr. Mime|Nec|Class|Soft|Non
+Muk|Nec|Class|Soft|Non
+Mulan|Nec|Class|Soft|Non
+Mummy|Nec|Class|Soft|Non
+Murder|Nec|Class|Soft|Non
+Muse|Nec|Class|Soft|Non
+Music|Nec|Class|Soft|Non
+Mutant|Nec|Class|Soft|Non
+MVP|Nec|Class|Soft|Non
+Mystery|Nec|Class|Soft|Non
+Mythical|Nec|Class|Soft|Non
