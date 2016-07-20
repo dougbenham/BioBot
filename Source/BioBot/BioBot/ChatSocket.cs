@@ -519,10 +519,10 @@ namespace BioBot
             BattleNetClient battleNetClient = new BattleNetClient(this.Exp);
             checked
             {
-                string[] array2 = new string[num5 - 1 + 1];
-                CdKey[] array3 = new CdKey[num5 - 1 + 1];
-                byte[][] array4 = new byte[num5 - 1 + 1][];
-                int[] array5 = new int[num5 - 1 + 1];
+                string[] array2 = new string[num5];
+                CdKey[] array3 = new CdKey[num5];
+                byte[][] array4 = new byte[num5][];
+                int[] array5 = new int[num5];
                 array2[0] = this.BnetInfo.ClassicCdKey;
                 array2[0] = array2[0].Replace("-", "");
                 array2[0] = array2[0].Replace(" ", "");
@@ -557,7 +557,7 @@ namespace BioBot
                     }
                 }
                 string str = "";
-                char[] array6 = new char[array.Length - 1 + 1];
+                char[] array6 = new char[array.Length];
                 int arg_1EF_0 = 0;
                 int num7 = array.Length - 1;
                 for (int j = arg_1EF_0; j <= num7; j++)

@@ -38,7 +38,7 @@ namespace BioBot
 						ProjectData.ClearProjectError();
 					}
 				}
-				PluginServices.AvailablePlugin[] array = new PluginServices.AvailablePlugin[arrayList.Count - 1 + 1];
+				PluginServices.AvailablePlugin[] array = new PluginServices.AvailablePlugin[arrayList.Count];
 				if (arrayList.Count != 0)
 				{
 					arrayList.CopyTo(array);

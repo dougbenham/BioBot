@@ -1423,7 +1423,7 @@ namespace BioBot
 				}
 				this.CPlugin.Text = Conversions.ToString(this.CPlugin.Items[0]);
 				List<string> fileStrings = MainForm.GetFileStrings("Settings\\cdkeys.txt");
-				string[] array = new string[fileStrings.Count - 1 + 1];
+				string[] array = new string[fileStrings.Count];
 				fileStrings.CopyTo(array);
 				this.KeyListEast = new List<string>(array);
 				this.KeyListWest = new List<string>(array);
@@ -1576,7 +1576,7 @@ namespace BioBot
 				List<string> cdKeys = null;
 				if (Operators.CompareString(left, "useast.battle.net", false) == 0)
 				{
-					string[] array = new string[MainForm.Accounts[this.CAccounts.Text].Count - 1 + 1];
+					string[] array = new string[MainForm.Accounts[this.CAccounts.Text].Count];
 					try
 					{
 						this.KeyListEast.CopyTo(0, array, 0, array.Length);
@@ -1594,7 +1594,7 @@ namespace BioBot
 				}
 				if (Operators.CompareString(left, "uswest.battle.net", false) == 0)
 				{
-					string[] array2 = new string[MainForm.Accounts[this.CAccounts.Text].Count - 1 + 1];
+					string[] array2 = new string[MainForm.Accounts[this.CAccounts.Text].Count];
 					try
 					{
 						this.KeyListWest.CopyTo(0, array2, 0, array2.Length);
@@ -1612,7 +1612,7 @@ namespace BioBot
 				}
 				if (Operators.CompareString(left, "asia.battle.net", false) == 0)
 				{
-					string[] array3 = new string[MainForm.Accounts[this.CAccounts.Text].Count - 1 + 1];
+					string[] array3 = new string[MainForm.Accounts[this.CAccounts.Text].Count];
 					try
 					{
 						this.KeyListAsia.CopyTo(0, array3, 0, array3.Length);
@@ -1630,7 +1630,7 @@ namespace BioBot
 				}
 				if (Operators.CompareString(left, "europe.battle.net", false) == 0)
 				{
-					string[] array4 = new string[MainForm.Accounts[this.CAccounts.Text].Count - 1 + 1];
+					string[] array4 = new string[MainForm.Accounts[this.CAccounts.Text].Count];
 					try
 					{
 						this.KeyListEurope.CopyTo(0, array4, 0, array4.Length);
