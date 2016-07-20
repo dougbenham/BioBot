@@ -53,7 +53,7 @@ namespace BioBot
 
 		public bool GetBoolean(string Section, string Key, bool Default)
 		{
-			return iniFile.GetPrivateProfileInt(ref Section, ref Key, (-((Default > false) ? 1 : 0)) ? 1 : 0, ref this.strFilename) == 1;
+			return iniFile.GetPrivateProfileInt(ref Section, ref Key, Default ? 1 : 0, ref this.strFilename) == 1;
 		}
 
 		public void WriteString(string Section, string Key, string Value)
@@ -70,7 +70,7 @@ namespace BioBot
 
 		public void WriteBoolean(string Section, string Key, bool Value)
 		{
-			this.WriteString(Section, Key, Conversions.ToString((-((Value > false) ? 1 : 0)) ? 1 : 0));
+			this.WriteString(Section, Key, Conversions.ToString(Value ? 1 : 0));
 			this.Flush();
 		}
 

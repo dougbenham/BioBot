@@ -1430,23 +1430,8 @@ namespace BioBot
 				this.KeyListAsia = new List<string>(array);
 				this.KeyListEurope = new List<string>(array);
 				this.Proxies = MainForm.GetFileStrings("Settings\\proxies.txt");
-				try
-				{
-					List<string>.Enumerator enumerator = this.Proxies.GetEnumerator();
-					while (enumerator.MoveNext())
-					{
-						string current = enumerator.Current;
-						this.CProxy.Items.Add(current.Split(new char[]
-						{
-							':'
-						})[0]);
-					}
-				}
-				finally
-				{
-					List<string>.Enumerator enumerator;
-					((IDisposable)enumerator).Dispose();
-				}
+                foreach (var proxy in this.Proxies)
+                    this.CProxy.Items.Add(proxy.Split(':')[0]);
 				this.Proxies.Insert(0, "");
 				this.CProxy.Items.Insert(0, "");
 				this.CProxy.SelectedIndex = 0;
@@ -1588,7 +1573,7 @@ namespace BioBot
 			string left = ConnectInfo.RealmList.AddressFromName(this.CRealm.Text);
 			checked
 			{
-				List<string> cdKeys;
+				List<string> cdKeys = null;
 				if (Operators.CompareString(left, "useast.battle.net", false) == 0)
 				{
 					string[] array = new string[MainForm.Accounts[this.CAccounts.Text].Count - 1 + 1];

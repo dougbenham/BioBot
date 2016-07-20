@@ -25,16 +25,12 @@ namespace BioBot
 			[MethodImpl(MethodImplOptions.Synchronized)]
 			set
 			{
-				EventHandler value2 = new EventHandler(this.Label1_Click);
-				if (this._Label1 != null)
-				{
-					this._Label1.Click -= value2;
-				}
-				this._Label1 = value;
-				if (this._Label1 != null)
-				{
-					this._Label1.Click += value2;
-				}
+				EventHandler value2 = this.Label1_Click;
+			    if (this._Label1 != null)
+			        this._Label1.Click -= value2;
+			    this._Label1 = value;
+			    if (this._Label1 != null)
+			        this._Label1.Click += value2;
 			}
 		}
 

@@ -81,12 +81,8 @@ namespace BioBot
 							{
 								if (Operators.ConditionalCompareObjectGreater(Operators.SubtractObject(Environment.TickCount, this.PacketInWait.GetByIndex(i)), 15000, false))
 								{
-									D2Socket.PacketLostEventHandler packetLostEvent = this.PacketLostEvent;
-									if (packetLostEvent != null)
-									{
-										packetLostEvent(Conversions.ToInteger(this.PacketInWait.Keys.Cast<object>().ElementAtOrDefault(i)));
-									}
-									this.PacketInWait.Remove(i);
+                                    this.PacketLostEvent?.Invoke(Conversions.ToInteger(this.PacketInWait.Keys.Cast<object>().ElementAtOrDefault(i)));
+                                    this.PacketInWait.Remove(i);
 									break;
 								}
 							}
@@ -183,20 +179,8 @@ namespace BioBot
 								List<byte[]> list = Compression.SplitPackets(buffer, num4);
 								if (list != null)
 								{
-									try
-									{
-										List<byte[]>.Enumerator enumerator = list.GetEnumerator();
-										while (enumerator.MoveNext())
-										{
-											byte[] current = enumerator.Current;
-											this.ParsePacket(current);
-										}
-									}
-									finally
-									{
-										List<byte[]>.Enumerator enumerator;
-										((IDisposable)enumerator).Dispose();
-									}
+								    foreach (var packet in list)
+								        this.ParsePacket(packet);
 								}
 							}
 						}

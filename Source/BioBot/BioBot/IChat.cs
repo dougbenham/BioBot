@@ -5,79 +5,82 @@ using System.Drawing;
 
 namespace BioBot
 {
+    namespace Chat
+    {
+        public delegate void OnConnectedEventHandler();
+
+        public delegate void OnDisconnectedEventHandler();
+
+        public delegate void UpdateEventHandler();
+
+        public delegate void OnAdInfoEventHandler(AdInfo packet);
+
+        public delegate void OnBnetAuthResponseEventHandler(BnetAuthResponse packet);
+
+        public delegate void OnBnetConnectionResponseEventHandler(BnetConnectionResponse packet);
+
+        public delegate void OnBnetLogonResponseEventHandler(BnetLogonResponse packet);
+
+        public delegate void OnBnetPingEventHandler(BnetPing packet);
+
+        public delegate void OnChannelListEventHandler(ChannelList packet);
+
+        public delegate void OnChatEventEventHandler(ChatEvent packet);
+
+        public delegate void OnEnterChatResponseEventHandler(EnterChatResponse packet);
+
+        public delegate void OnExtraWorkInfoEventHandler(ExtraWorkInfo packet);
+
+        public delegate void OnFileTimeInfoEventHandler(FileTimeInfo packet);
+
+        public delegate void OnServerKeepAliveEventHandler(BotCore.BnetServer.KeepAlive packet);
+
+        public delegate void OnNewsInfoEventHandler(NewsInfo packet);
+
+        public delegate void OnQueryRealmsResponseEventHandler(QueryRealmsResponse packet);
+
+        public delegate void OnRealmLogonResponseEventHandler(RealmLogonResponse packet);
+
+        public delegate void OnRequiredExtraWorkInfoEventHandler(RequiredExtraWorkInfo packet);
+    }
+
 	public interface IChat
 	{
-		public delegate void OnConnectedEventHandler();
+		event Chat.OnConnectedEventHandler OnConnected;
 
-		public delegate void OnDisconnectedEventHandler();
+		event Chat.OnDisconnectedEventHandler OnDisconnected;
 
-		public delegate void UpdateEventHandler();
+		event Chat.UpdateEventHandler Update;
 
-		public delegate void OnAdInfoEventHandler(AdInfo packet);
+		event Chat.OnAdInfoEventHandler OnAdInfo;
 
-		public delegate void OnBnetAuthResponseEventHandler(BnetAuthResponse packet);
+		event Chat.OnBnetAuthResponseEventHandler OnBnetAuthResponse;
 
-		public delegate void OnBnetConnectionResponseEventHandler(BnetConnectionResponse packet);
+		event Chat.OnBnetConnectionResponseEventHandler OnBnetConnectionResponse;
 
-		public delegate void OnBnetLogonResponseEventHandler(BnetLogonResponse packet);
+		event Chat.OnBnetLogonResponseEventHandler OnBnetLogonResponse;
 
-		public delegate void OnBnetPingEventHandler(BnetPing packet);
+		event Chat.OnBnetPingEventHandler OnBnetPing;
 
-		public delegate void OnChannelListEventHandler(ChannelList packet);
+		event Chat.OnChannelListEventHandler OnChannelList;
 
-		public delegate void OnChatEventEventHandler(ChatEvent packet);
+		event Chat.OnChatEventEventHandler OnChatEvent;
 
-		public delegate void OnEnterChatResponseEventHandler(EnterChatResponse packet);
+		event Chat.OnEnterChatResponseEventHandler OnEnterChatResponse;
 
-		public delegate void OnExtraWorkInfoEventHandler(ExtraWorkInfo packet);
+		event Chat.OnExtraWorkInfoEventHandler OnExtraWorkInfo;
 
-		public delegate void OnFileTimeInfoEventHandler(FileTimeInfo packet);
+		event Chat.OnFileTimeInfoEventHandler OnFileTimeInfo;
 
-		public delegate void OnServerKeepAliveEventHandler(BotCore.BnetServer.KeepAlive packet);
+		event Chat.OnServerKeepAliveEventHandler OnServerKeepAlive;
 
-		public delegate void OnNewsInfoEventHandler(NewsInfo packet);
+		event Chat.OnNewsInfoEventHandler OnNewsInfo;
 
-		public delegate void OnQueryRealmsResponseEventHandler(QueryRealmsResponse packet);
+		event Chat.OnQueryRealmsResponseEventHandler OnQueryRealmsResponse;
 
-		public delegate void OnRealmLogonResponseEventHandler(RealmLogonResponse packet);
+		event Chat.OnRealmLogonResponseEventHandler OnRealmLogonResponse;
 
-		public delegate void OnRequiredExtraWorkInfoEventHandler(RequiredExtraWorkInfo packet);
-
-		event IChat.OnConnectedEventHandler OnConnected;
-
-		event IChat.OnDisconnectedEventHandler OnDisconnected;
-
-		event IChat.UpdateEventHandler Update;
-
-		event IChat.OnAdInfoEventHandler OnAdInfo;
-
-		event IChat.OnBnetAuthResponseEventHandler OnBnetAuthResponse;
-
-		event IChat.OnBnetConnectionResponseEventHandler OnBnetConnectionResponse;
-
-		event IChat.OnBnetLogonResponseEventHandler OnBnetLogonResponse;
-
-		event IChat.OnBnetPingEventHandler OnBnetPing;
-
-		event IChat.OnChannelListEventHandler OnChannelList;
-
-		event IChat.OnChatEventEventHandler OnChatEvent;
-
-		event IChat.OnEnterChatResponseEventHandler OnEnterChatResponse;
-
-		event IChat.OnExtraWorkInfoEventHandler OnExtraWorkInfo;
-
-		event IChat.OnFileTimeInfoEventHandler OnFileTimeInfo;
-
-		event IChat.OnServerKeepAliveEventHandler OnServerKeepAlive;
-
-		event IChat.OnNewsInfoEventHandler OnNewsInfo;
-
-		event IChat.OnQueryRealmsResponseEventHandler OnQueryRealmsResponse;
-
-		event IChat.OnRealmLogonResponseEventHandler OnRealmLogonResponse;
-
-		event IChat.OnRequiredExtraWorkInfoEventHandler OnRequiredExtraWorkInfo;
+		event Chat.OnRequiredExtraWorkInfoEventHandler OnRequiredExtraWorkInfo;
 
 		void WriteToLog(string Text, Color Color);
 

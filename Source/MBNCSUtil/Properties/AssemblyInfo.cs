@@ -1,25 +1,36 @@
-using System;
-using System.Diagnostics;
-using System.Reflection;
-using System.Resources;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security;
-using System.Security.Permissions;
 
-[assembly: AssemblyVersion("2.1.7.22")]
-[assembly: CLSCompliant(true)]
-[assembly: Debuggable(DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright © Robert Paveza, 2005-2008.  Adapted from BNCSUtil at the request of the author.  Licensed under the modified BSD license.  See License.txt for licensing details.")]
-[assembly: AssemblyDescription("Provides Battle.net authentication services for managed applications.")]
-[assembly: AssemblyFileVersion("2.1.7.22")]
-[assembly: AssemblyProduct("MBNCSUtil")]
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
 [assembly: AssemblyTitle("MBNCSUtil")]
-[assembly: AssemblyTrademark("Blizzard, Battle.net, Starcraft, Warcraft, Warcraft II: Battle.net Edition, The Tides of Darkness, Into the Dark Portal, Diablo, The Lord of Destruction, Brood War, The Reign of Chaos, and The Frozen Throne are trademarks or registered trademarks of Blizzard Entertainment Inc. in the United States and/or other countries. Other marks may be the trademarks or registered trademarks of their respective owners.")]
-[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)]
-[assembly: CompilationRelaxations(8)]
-[assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MBNCSUtil")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
+// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-[assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-[module: UnverifiableCode]
+
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("d27f6eb6-aa6b-4d40-a30b-0927b416f7ae")]
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

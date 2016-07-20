@@ -1,6 +1,5 @@
 using BotCore.RealmClient;
 using BotCore.RealmServer;
-using MBNCSUtil;
 using Microsoft.VisualBasic.CompilerServices;
 using System;
 using System.Drawing;
@@ -8,6 +7,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
+using BNSharp.MBNCSUtil;
 
 namespace BioBot
 {
@@ -254,12 +254,12 @@ namespace BioBot
 			{
 				if (Proxy == null)
 				{
-					this.WriteToLog("Connecting: " + this.g_ServerIp.ToString(), Color.Gray);
+					this.WriteToLog("Connecting: " + this.g_ServerIp, Color.Gray);
 					base.Connect(this.g_ServerIp.ToString(), (ushort)num);
 				}
 				else
 				{
-					this.WriteToLog("Connecting W/ Proxy: " + this.g_ServerIp.ToString(), Color.Gray);
+					this.WriteToLog("Connecting W/ Proxy: " + this.g_ServerIp, Color.Gray);
 					base.Connect(this.g_ServerIp.ToString(), (ushort)num, Proxy.Address, Conversions.ToString((uint)Proxy.Port), Proxy.Username, Proxy.Password);
 				}
 			}
@@ -283,126 +283,78 @@ namespace BioBot
 			this.WriteToLog("Authorizing..", Color.Gray);
 		}
 
-		public override void ParsePacket(byte[] Data)
-		{
-			DataReader dataReader = new DataReader(Data);
-			int num = (int)dataReader.ReadInt16();
-			RealmServerPacket packetID = (RealmServerPacket)dataReader.ReadByte();
-			this.ReportPacket((int)packetID);
-			switch (packetID)
-			{
-			case RealmServerPacket.RealmStartupResponse:
-			{
-				RealmSocket.OnRealmStartupResponseEventHandler onRealmStartupResponseEvent = this.OnRealmStartupResponseEvent;
-				if (onRealmStartupResponseEvent != null)
-				{
-					onRealmStartupResponseEvent(new RealmStartupResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.CharacterCreationResponse:
-			{
-				RealmSocket.OnCharacterCreationResponseEventHandler onCharacterCreationResponseEvent = this.OnCharacterCreationResponseEvent;
-				if (onCharacterCreationResponseEvent != null)
-				{
-					onCharacterCreationResponseEvent(new CharacterCreationResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.CreateGameResponse:
-			{
-				RealmSocket.OnCreateGameResponseEventHandler onCreateGameResponseEvent = this.OnCreateGameResponseEvent;
-				if (onCreateGameResponseEvent != null)
-				{
-					onCreateGameResponseEvent(new CreateGameResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.JoinGameResponse:
-			{
-				RealmSocket.OnJoinGameResponseEventHandler onJoinGameResponseEvent = this.OnJoinGameResponseEvent;
-				if (onJoinGameResponseEvent != null)
-				{
-					onJoinGameResponseEvent(new JoinGameResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.GameList:
-			{
-				RealmSocket.OnGameListEventHandler onGameListEvent = this.OnGameListEvent;
-				if (onGameListEvent != null)
-				{
-					onGameListEvent(new GameList(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.GameInfo:
-			{
-				RealmSocket.OnGameInfoEventHandler onGameInfoEvent = this.OnGameInfoEvent;
-				if (onGameInfoEvent != null)
-				{
-					onGameInfoEvent(new GameInfo(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.CharacterLogonResponse:
-			{
-				RealmSocket.OnCharacterLogonResponseEventHandler onCharacterLogonResponseEvent = this.OnCharacterLogonResponseEvent;
-				if (onCharacterLogonResponseEvent != null)
-				{
-					onCharacterLogonResponseEvent(new CharacterLogonResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.CharacterDeletionResponse:
-			{
-				RealmSocket.OnCharacterDeletionResponseEventHandler onCharacterDeletionResponseEvent = this.OnCharacterDeletionResponseEvent;
-				if (onCharacterDeletionResponseEvent != null)
-				{
-					onCharacterDeletionResponseEvent(new CharacterDeletionResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.MessageOfTheDay:
-			{
-				RealmSocket.OnMessageOfTheDayEventHandler onMessageOfTheDayEvent = this.OnMessageOfTheDayEvent;
-				if (onMessageOfTheDayEvent != null)
-				{
-					onMessageOfTheDayEvent(new MessageOfTheDay(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.GameCreationQueue:
-			{
-				RealmSocket.OnGameCreationQueueEventHandler onGameCreationQueueEvent = this.OnGameCreationQueueEvent;
-				if (onGameCreationQueueEvent != null)
-				{
-					onGameCreationQueueEvent(new GameCreationQueue(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.CharacterUpgradeResponse:
-			{
-				RealmSocket.OnCharacterUpgradeResponseEventHandler onCharacterUpgradeResponseEvent = this.OnCharacterUpgradeResponseEvent;
-				if (onCharacterUpgradeResponseEvent != null)
-				{
-					onCharacterUpgradeResponseEvent(new CharacterUpgradeResponse(Data));
-				}
-				break;
-			}
-			case RealmServerPacket.CharacterList:
-			{
-				RealmSocket.OnCharacterListEventHandler onCharacterListEvent = this.OnCharacterListEvent;
-				if (onCharacterListEvent != null)
-				{
-					onCharacterListEvent(new CharacterList(Data));
-				}
-				break;
-			}
-			}
-		}
+	    public override void ParsePacket(byte[] Data)
+	    {
+	        DataReader dataReader = new DataReader(Data);
+	        int num = (int) dataReader.ReadInt16();
+	        RealmServerPacket packetID = (RealmServerPacket) dataReader.ReadByte();
+	        this.ReportPacket((int) packetID);
+	        switch (packetID)
+	        {
+	            case RealmServerPacket.RealmStartupResponse:
+	            {
+	                this.OnRealmStartupResponseEvent?.Invoke(new RealmStartupResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.CharacterCreationResponse:
+	            {
+	                this.OnCharacterCreationResponseEvent?.Invoke(new CharacterCreationResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.CreateGameResponse:
+	            {
+	                this.OnCreateGameResponseEvent?.Invoke(new CreateGameResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.JoinGameResponse:
+	            {
+	                this.OnJoinGameResponseEvent?.Invoke(new JoinGameResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.GameList:
+	            {
+	                this.OnGameListEvent?.Invoke(new GameList(Data));
+	                break;
+	            }
+	            case RealmServerPacket.GameInfo:
+	            {
+	                this.OnGameInfoEvent?.Invoke(new GameInfo(Data));
+	                break;
+	            }
+	            case RealmServerPacket.CharacterLogonResponse:
+	            {
+	                this.OnCharacterLogonResponseEvent?.Invoke(new CharacterLogonResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.CharacterDeletionResponse:
+	            {
+	                this.OnCharacterDeletionResponseEvent?.Invoke(new CharacterDeletionResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.MessageOfTheDay:
+	            {
+	                this.OnMessageOfTheDayEvent?.Invoke(new MessageOfTheDay(Data));
+	                break;
+	            }
+	            case RealmServerPacket.GameCreationQueue:
+	            {
+	                this.OnGameCreationQueueEvent?.Invoke(new GameCreationQueue(Data));
+	                break;
+	            }
+	            case RealmServerPacket.CharacterUpgradeResponse:
+	            {
+	                this.OnCharacterUpgradeResponseEvent?.Invoke(new CharacterUpgradeResponse(Data));
+	                break;
+	            }
+	            case RealmServerPacket.CharacterList:
+	            {
+	                this.OnCharacterListEvent?.Invoke(new CharacterList(Data));
+	                break;
+	            }
+	        }
+	    }
 
-		public void SendPacket(RCPacket Packet)
+	    public void SendPacket(RCPacket Packet)
 		{
 			this.SendPacket(Packet.Data);
 		}

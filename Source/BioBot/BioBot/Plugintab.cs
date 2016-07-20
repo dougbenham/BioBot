@@ -101,7 +101,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual Button BConnect
+		internal virtual Button BConnect
 		{
 			get
 			{
@@ -114,7 +114,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual System.Windows.Forms.Timer BConnectDelay
+        internal virtual System.Windows.Forms.Timer BConnectDelay
 		{
 			get
 			{
@@ -136,7 +136,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual Button BConnectAll
+        internal virtual Button BConnectAll
 		{
 			get
 			{
@@ -158,7 +158,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual ListBox BotList
+        internal virtual ListBox BotList
 		{
 			get
 			{
@@ -186,7 +186,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual Button Closebutton
+        internal virtual Button Closebutton
 		{
 			get
 			{
@@ -208,7 +208,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual Panel Box
+        internal virtual Panel Box
 		{
 			get
 			{
@@ -221,7 +221,7 @@ namespace BioBot
 			}
 		}
 
-		private virtual List<ContextMenuStrip> Optionz
+        internal virtual List<ContextMenuStrip> Optionz
 		{
 			get
 			{
@@ -411,50 +411,40 @@ namespace BioBot
 			}
 			this.RawcdKeys = CdKeys;
 			this.GenerateBotInfos(CdKeys, Accounts);
-			try
-			{
-				List<ConnectInfo>.Enumerator enumerator = Plugintab.BotInfos.GetEnumerator();
-				while (enumerator.MoveNext())
-				{
-					ConnectInfo current = enumerator.Current;
-					ToolStripButton toolStripButton = new ToolStripButton("Connect");
-					ToolStripButton toolStripButton2 = new ToolStripButton("Connect All");
-					this.Connect.Add(toolStripButton);
-					this.ConnectAll.Add(toolStripButton2);
-					ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-					contextMenuStrip.TopLevel = false;
-					contextMenuStrip.Parent = this;
-					contextMenuStrip.BackColor = Color.FromArgb(43, 43, 43);
-					contextMenuStrip.ForeColor = Color.Gray;
-					contextMenuStrip.ShowImageMargin = false;
-					contextMenuStrip.Items.Add(toolStripButton);
-					contextMenuStrip.Items.Add(toolStripButton2);
-					this.Optionz.Add(contextMenuStrip);
-					LogBox logBox = new LogBox();
-					logBox.Parent = this;
-					logBox.Visible = false;
-					logBox.BackColor = Color.FromArgb(43, 43, 43);
-					logBox.BorderStyle = BorderStyle.None;
-					logBox.ReadOnly = true;
-					Control arg_30A_0 = logBox;
-					Point point = new Point(1, 1);
-					arg_30A_0.Location = point;
-					Control arg_328_0 = logBox;
-					point = new Point(550, 262);
-					arg_328_0.Size = (Size)point;
-					this.LogBox.Add(logBox);
-					MyProject.Forms.MainForm.Panel4.Controls.Add(logBox);
-					IPluginModule pluginModule = (IPluginModule)PluginServices.CreateInstance(SelectedPlugin);
-					this.BotInstances.Add((ConnectionManager)pluginModule);
-					this.BotList.Items.Add(current.BnetUserName);
-				}
-			}
-			finally
-			{
-				List<ConnectInfo>.Enumerator enumerator;
-				((IDisposable)enumerator).Dispose();
-			}
-			this.BotList.SelectedIndex = 0;
+		    foreach (var connect in Plugintab.BotInfos)
+		    {
+		        ToolStripButton toolStripButton = new ToolStripButton("Connect");
+		        ToolStripButton toolStripButton2 = new ToolStripButton("Connect All");
+		        this.Connect.Add(toolStripButton);
+		        this.ConnectAll.Add(toolStripButton2);
+		        ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+		        contextMenuStrip.TopLevel = false;
+		        contextMenuStrip.Parent = this;
+		        contextMenuStrip.BackColor = Color.FromArgb(43, 43, 43);
+		        contextMenuStrip.ForeColor = Color.Gray;
+		        contextMenuStrip.ShowImageMargin = false;
+		        contextMenuStrip.Items.Add(toolStripButton);
+		        contextMenuStrip.Items.Add(toolStripButton2);
+		        this.Optionz.Add(contextMenuStrip);
+		        LogBox logBox = new LogBox();
+		        logBox.Parent = this;
+		        logBox.Visible = false;
+		        logBox.BackColor = Color.FromArgb(43, 43, 43);
+		        logBox.BorderStyle = BorderStyle.None;
+		        logBox.ReadOnly = true;
+		        Control arg_30A_0 = logBox;
+		        Point point = new Point(1, 1);
+		        arg_30A_0.Location = point;
+		        Control arg_328_0 = logBox;
+		        point = new Point(550, 262);
+		        arg_328_0.Size = (Size) point;
+		        this.LogBox.Add(logBox);
+		        MyProject.Forms.MainForm.Panel4.Controls.Add(logBox);
+		        IPluginModule pluginModule = (IPluginModule) PluginServices.CreateInstance(SelectedPlugin);
+		        this.BotInstances.Add((ConnectionManager) pluginModule);
+		        this.BotList.Items.Add(connect.BnetUserName);
+		    }
+		    this.BotList.SelectedIndex = 0;
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -621,20 +611,8 @@ namespace BioBot
 
 		private void BotList_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			try
-			{
-				List<LogBox>.Enumerator enumerator = this.LogBox.GetEnumerator();
-				while (enumerator.MoveNext())
-				{
-					LogBox current = enumerator.Current;
-					current.Visible = false;
-				}
-			}
-			finally
-			{
-				List<LogBox>.Enumerator enumerator;
-				((IDisposable)enumerator).Dispose();
-			}
+		    foreach (var instance in this.LogBox)
+		        instance.Visible = false;
 			int arg_4A_0 = 0;
 			checked
 			{
@@ -693,34 +671,12 @@ namespace BioBot
 
 		private void Closebutton_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				List<ConnectionManager>.Enumerator enumerator = this.BotInstances.GetEnumerator();
-				while (enumerator.MoveNext())
-				{
-					ConnectionManager current = enumerator.Current;
-					current.Disconnect();
-				}
-			}
-			finally
-			{
-				List<ConnectionManager>.Enumerator enumerator;
-				((IDisposable)enumerator).Dispose();
-			}
-			try
-			{
-				List<LogBox>.Enumerator enumerator2 = this.LogBox.GetEnumerator();
-				while (enumerator2.MoveNext())
-				{
-					LogBox current2 = enumerator2.Current;
-					current2.Dispose();
-				}
-			}
-			finally
-			{
-				List<LogBox>.Enumerator enumerator2;
-				((IDisposable)enumerator2).Dispose();
-			}
+            foreach (var instance in this.BotInstances)
+                instance.Disconnect();
+
+            foreach (var instance in this.LogBox)
+                instance.Dispose();
+
 			string realm = this.Realm;
 			if (Operators.CompareString(realm, "useast.battle.net", false) == 0)
 			{

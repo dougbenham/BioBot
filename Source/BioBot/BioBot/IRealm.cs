@@ -6,67 +6,70 @@ using System.Net;
 
 namespace BioBot
 {
-	public interface IRealm
+    namespace Realm
+    {
+        public delegate void OnConnectedEventHandler();
+
+        public delegate void OnDisconnectedEventHandler();
+
+        public delegate void UpdateEventHandler();
+
+        public delegate void OnCharacterCreationResponseEventHandler(CharacterCreationResponse Packet);
+
+        public delegate void OnCharacterDeletionResponseEventHandler(CharacterDeletionResponse Packet);
+
+        public delegate void OnCharacterListEventHandler(CharacterList Packet);
+
+        public delegate void OnCharacterLogonResponseEventHandler(CharacterLogonResponse Packet);
+
+        public delegate void OnCharacterUpgradeResponseEventHandler(CharacterUpgradeResponse Packet);
+
+        public delegate void OnCreateGameResponseEventHandler(CreateGameResponse Packet);
+
+        public delegate void OnGameCreationQueueEventHandler(GameCreationQueue Packet);
+
+        public delegate void OnGameInfoEventHandler(GameInfo Packet);
+
+        public delegate void OnGameListEventHandler(GameList Packet);
+
+        public delegate void OnJoinGameResponseEventHandler(JoinGameResponse Packet);
+
+        public delegate void OnMessageOfTheDayEventHandler(MessageOfTheDay Packet);
+
+        public delegate void OnRealmStartupResponseEventHandler(RealmStartupResponse Packet);
+    }
+
+    public interface IRealm
 	{
-		public delegate void OnConnectedEventHandler();
+		event Realm.OnConnectedEventHandler OnConnected;
 
-		public delegate void OnDisconnectedEventHandler();
+		event Realm.OnDisconnectedEventHandler OnDisconnected;
 
-		public delegate void UpdateEventHandler();
+		event Realm.UpdateEventHandler Update;
 
-		public delegate void OnCharacterCreationResponseEventHandler(CharacterCreationResponse Packet);
+		event Realm.OnCharacterCreationResponseEventHandler OnCharacterCreationResponse;
 
-		public delegate void OnCharacterDeletionResponseEventHandler(CharacterDeletionResponse Packet);
+		event Realm.OnCharacterDeletionResponseEventHandler OnCharacterDeletionResponse;
 
-		public delegate void OnCharacterListEventHandler(CharacterList Packet);
+		event Realm.OnCharacterListEventHandler OnCharacterList;
 
-		public delegate void OnCharacterLogonResponseEventHandler(CharacterLogonResponse Packet);
+		event Realm.OnCharacterLogonResponseEventHandler OnCharacterLogonResponse;
 
-		public delegate void OnCharacterUpgradeResponseEventHandler(CharacterUpgradeResponse Packet);
+		event Realm.OnCharacterUpgradeResponseEventHandler OnCharacterUpgradeResponse;
 
-		public delegate void OnCreateGameResponseEventHandler(CreateGameResponse Packet);
+		event Realm.OnCreateGameResponseEventHandler OnCreateGameResponse;
 
-		public delegate void OnGameCreationQueueEventHandler(GameCreationQueue Packet);
+		event Realm.OnGameCreationQueueEventHandler OnGameCreationQueue;
 
-		public delegate void OnGameInfoEventHandler(GameInfo Packet);
+		event Realm.OnGameInfoEventHandler OnGameInfo;
 
-		public delegate void OnGameListEventHandler(GameList Packet);
+		event Realm.OnGameListEventHandler OnGameList;
 
-		public delegate void OnJoinGameResponseEventHandler(JoinGameResponse Packet);
+		event Realm.OnJoinGameResponseEventHandler OnJoinGameResponse;
 
-		public delegate void OnMessageOfTheDayEventHandler(MessageOfTheDay Packet);
+		event Realm.OnMessageOfTheDayEventHandler OnMessageOfTheDay;
 
-		public delegate void OnRealmStartupResponseEventHandler(RealmStartupResponse Packet);
-
-		event IRealm.OnConnectedEventHandler OnConnected;
-
-		event IRealm.OnDisconnectedEventHandler OnDisconnected;
-
-		event IRealm.UpdateEventHandler Update;
-
-		event IRealm.OnCharacterCreationResponseEventHandler OnCharacterCreationResponse;
-
-		event IRealm.OnCharacterDeletionResponseEventHandler OnCharacterDeletionResponse;
-
-		event IRealm.OnCharacterListEventHandler OnCharacterList;
-
-		event IRealm.OnCharacterLogonResponseEventHandler OnCharacterLogonResponse;
-
-		event IRealm.OnCharacterUpgradeResponseEventHandler OnCharacterUpgradeResponse;
-
-		event IRealm.OnCreateGameResponseEventHandler OnCreateGameResponse;
-
-		event IRealm.OnGameCreationQueueEventHandler OnGameCreationQueue;
-
-		event IRealm.OnGameInfoEventHandler OnGameInfo;
-
-		event IRealm.OnGameListEventHandler OnGameList;
-
-		event IRealm.OnJoinGameResponseEventHandler OnJoinGameResponse;
-
-		event IRealm.OnMessageOfTheDayEventHandler OnMessageOfTheDay;
-
-		event IRealm.OnRealmStartupResponseEventHandler OnRealmStartupResponse;
+		event Realm.OnRealmStartupResponseEventHandler OnRealmStartupResponse;
 
 		bool Connected
 		{

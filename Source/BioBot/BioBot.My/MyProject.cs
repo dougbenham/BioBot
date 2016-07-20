@@ -88,24 +88,14 @@ namespace BioBot.My
 					MyProject.MyForms.m_FormBeingCreated.Add(typeof(T), null);
 					try
 					{
-						try
-						{
-							return Activator.CreateInstance<T>();
-						}
-						object arg_74_0;
-						TargetInvocationException expr_79 = arg_74_0 as TargetInvocationException;
-						int arg_96_0;
-						if (expr_79 == null)
-						{
-							arg_96_0 = 0;
-						}
-						else
-						{
-							TargetInvocationException ex = expr_79;
-							ProjectData.SetProjectError(expr_79);
-							arg_96_0 = (((ex.InnerException != null) > false) ? 1 : 0);
-						}
-						endfilter(arg_96_0);
+					    try
+					    {
+					        return Activator.CreateInstance<T>();
+					    }
+					    catch (TargetInvocationException arg_74_0)
+					    {
+					        ProjectData.SetProjectError(arg_74_0);
+					    }
 					}
 					finally
 					{

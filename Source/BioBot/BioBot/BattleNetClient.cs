@@ -51,7 +51,7 @@ namespace BioBot
 			char c3 = array[1];
 			string arg_3E_2 = c3.ToString();
 			char c4 = array[0];
-			string text2 = arg_3E_0 + arg_3E_1 + arg_3E_2 + c4.ToString();
+			string text2 = arg_3E_0 + arg_3E_1 + arg_3E_2 + c4;
 			return text.Equals(a_sA) || text2.Equals(a_sA);
 		}
 	}

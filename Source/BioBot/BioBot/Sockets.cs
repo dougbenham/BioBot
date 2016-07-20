@@ -140,12 +140,8 @@ namespace BioBot
 			catch (Exception expr_1F)
 			{
 				ProjectData.SetProjectError(expr_1F);
-				Sockets.FailToConnectEventHandler failToConnectEvent = this.FailToConnectEvent;
-				if (failToConnectEvent != null)
-				{
-					failToConnectEvent();
-				}
-				ProjectData.ClearProjectError();
+                this.FailToConnectEvent?.Invoke();
+                ProjectData.ClearProjectError();
 				return;
 			}
 			DataBuffer dataBuffer = new DataBuffer();
@@ -258,21 +254,13 @@ namespace BioBot
 					{
 					case false:
 					{
-						Sockets.DisconnectionEventHandler disconnectionEvent = this.DisconnectionEvent;
-						if (disconnectionEvent != null)
-						{
-							disconnectionEvent();
-						}
-						break;
+                                this.DisconnectionEvent?.Invoke();
+                                break;
 					}
 					case true:
 					{
-						Sockets.ConnectionEventHandler connectionEvent = this.ConnectionEvent;
-						if (connectionEvent != null)
-						{
-							connectionEvent();
-						}
-						break;
+                                this.ConnectionEvent?.Invoke();
+                                break;
 					}
 					}
 				}
@@ -288,12 +276,8 @@ namespace BioBot
 				if (this.Tcpsocket != null && this.Tcpsocket.Connected)
 				{
 					num = this.Tcpsocket.Available;
-					Sockets.UpdateEventHandler updateEvent = this.UpdateEvent;
-					if (updateEvent != null)
-					{
-						updateEvent(Environment.TickCount);
-					}
-				}
+                    this.UpdateEvent?.Invoke(Environment.TickCount);
+                }
 				if (num > 0)
 				{
 					this.DataReceived(num);
@@ -360,23 +344,15 @@ namespace BioBot
 			catch (Exception expr_2D)
 			{
 				ProjectData.SetProjectError(expr_2D);
-				Sockets.FailToConnectEventHandler failToConnectEvent = this.FailToConnectEvent;
-				if (failToConnectEvent != null)
-				{
-					failToConnectEvent();
-				}
-				ProjectData.ClearProjectError();
+                this.FailToConnectEvent?.Invoke();
+                ProjectData.ClearProjectError();
 			}
 		}
 
 		protected void Raisevent_Connected()
 		{
-			Sockets.ConnectionEventHandler connectionEvent = this.ConnectionEvent;
-			if (connectionEvent != null)
-			{
-				connectionEvent();
-			}
-		}
+            this.ConnectionEvent?.Invoke();
+        }
 
 		public void Disconnect()
 		{

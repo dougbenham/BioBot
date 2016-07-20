@@ -258,7 +258,7 @@ namespace BioBot
 			}
 			else
 			{
-				this.Chat.WriteToLog("[0x" + Conversions.ToString(packet.Packetid) + "]Authentication failed: " + packet.result.ToString(), Color.Red);
+				this.Chat.WriteToLog("[0x" + Conversions.ToString(packet.Packetid) + "]Authentication failed: " + packet.result, Color.Red);
 				this.Disconnect();
 			}
 		}
@@ -273,7 +273,7 @@ namespace BioBot
 			}
 			else
 			{
-				this.Chat.WriteToLog("[0x" + Conversions.ToString(Packet.Packetid) + "]Logon Failed: " + Packet.result.ToString(), Color.Red);
+				this.Chat.WriteToLog("[0x" + Conversions.ToString(Packet.Packetid) + "]Logon Failed: " + Packet.result, Color.Red);
 				if (Operators.CompareString(Packet.reason, "", false) != 0)
 				{
 					this.Chat.WriteToLog("[0x" + Conversions.ToString(Packet.Packetid) + "]Reason: " + Packet.reason, Color.Red);
@@ -304,7 +304,7 @@ namespace BioBot
 			}
 			else
 			{
-				this.Chat.WriteToLog("[0x" + Conversions.ToString(Packet.Packetid) + "]Connection Failed, Reason: " + Packet.result.ToString(), Color.Red);
+				this.Chat.WriteToLog("[0x" + Conversions.ToString(Packet.Packetid) + "]Connection Failed, Reason: " + Packet.result, Color.Red);
 				this.Chat.Disconnect();
 			}
 		}
@@ -314,22 +314,14 @@ namespace BioBot
 			if (PacketID == GameServerPacket.GameLogonSuccess)
 			{
 				this.Game.WriteToLog("Game Connection TimedOut", Color.Orange);
-				ConnectionManager.FailToJoinGameEventHandler failToJoinGameEvent = this.FailToJoinGameEvent;
-				if (failToJoinGameEvent != null)
-				{
-					failToJoinGameEvent();
-				}
-			}
+                this.FailToJoinGameEvent?.Invoke();
+            }
 		}
 
 		private void Game_FailToConnect()
 		{
-			ConnectionManager.FailToJoinGameEventHandler failToJoinGameEvent = this.FailToJoinGameEvent;
-			if (failToJoinGameEvent != null)
-			{
-				failToJoinGameEvent();
-			}
-		}
+            this.FailToJoinGameEvent?.Invoke();
+        }
 
 		private void GameSocket_OnGameLogonReceipt(GameLogonReceipt Packet)
 		{
@@ -464,7 +456,7 @@ namespace BioBot
 			}
 			else
 			{
-				this.Realm.WriteToLog("Character Logon Failed: " + Packet.Result.ToString(), Color.Red);
+				this.Realm.WriteToLog("Character Logon Failed: " + Packet.Result, Color.Red);
 			}
 		}
 
@@ -473,7 +465,7 @@ namespace BioBot
 			JoinGameResult result = Packet.Result;
 			if (result == JoinGameResult.Sucess)
 			{
-				this.Realm.WriteToLog("[GAME] Connecting To Game Server (" + Packet.GameServerIP.ToString() + ")", Color.Yellow);
+				this.Realm.WriteToLog("[GAME] Connecting To Game Server (" + Packet.GameServerIP + ")", Color.Yellow);
 				LeaveChat bnetPacket = new LeaveChat();
 				this.Chat.SendPacket(bnetPacket);
 				this.D2GHash = Packet.GameHash;
@@ -483,13 +475,9 @@ namespace BioBot
 			}
 			else
 			{
-				this.Realm.WriteToLog("[GAME] Cannot Join Game, Reason: " + Packet.Result.ToString(), Color.Red);
-				ConnectionManager.FailToJoinGameEventHandler failToJoinGameEvent = this.FailToJoinGameEvent;
-				if (failToJoinGameEvent != null)
-				{
-					failToJoinGameEvent();
-				}
-			}
+				this.Realm.WriteToLog("[GAME] Cannot Join Game, Reason: " + Packet.Result, Color.Red);
+                this.FailToJoinGameEvent?.Invoke();
+            }
 		}
 
 		protected virtual void RealmSocket_OnRealmStartupResponse(RealmStartupResponse Packet)
@@ -506,7 +494,7 @@ namespace BioBot
 				}
 				else
 				{
-					this.Realm.WriteToLog("[0x" + Conversions.ToString((byte)Packet.PacketID) + "] Connection Failed, Reason: " + Packet.Result.ToString(), Color.Red);
+					this.Realm.WriteToLog("[0x" + Conversions.ToString((byte)Packet.PacketID) + "] Connection Failed, Reason: " + Packet.Result, Color.Red);
 					this.Realm.Disconnect();
 				}
 			}
@@ -514,29 +502,21 @@ namespace BioBot
 
 		private void Realm_PacketLost(RealmServerPacket PacketID)
 		{
-			switch (PacketID)
-			{
-			case RealmServerPacket.CreateGameResponse:
-			{
-				this.Log.AddLine("Create Game Failed", Color.Red, HorizontalAlignment.Left);
-				ConnectionManager.FailToCreateGameEventHandler failToCreateGameEvent = this.FailToCreateGameEvent;
-				if (failToCreateGameEvent != null)
-				{
-					failToCreateGameEvent();
-				}
-				break;
-			}
-			case RealmServerPacket.JoinGameResponse:
-			{
-				this.Log.AddLine("Join Game Failed", Color.Red, HorizontalAlignment.Left);
-				ConnectionManager.FailToJoinGameEventHandler failToJoinGameEvent = this.FailToJoinGameEvent;
-				if (failToJoinGameEvent != null)
-				{
-					failToJoinGameEvent();
-				}
-				break;
-			}
-			}
+		    switch (PacketID)
+		    {
+		        case RealmServerPacket.CreateGameResponse:
+		        {
+		            this.Log.AddLine("Create Game Failed", Color.Red);
+		            this.FailToCreateGameEvent?.Invoke();
+		            break;
+		        }
+		        case RealmServerPacket.JoinGameResponse:
+		        {
+		            this.Log.AddLine("Join Game Failed", Color.Red);
+		            this.FailToJoinGameEvent?.Invoke();
+		            break;
+		        }
+		    }
 		}
 
 		private void Realm_OnCreateGameResponse(CreateGameResponse Packet)
@@ -548,13 +528,9 @@ namespace BioBot
 			}
 			else
 			{
-				this.Realm.WriteToLog("Game Creation Failed, Reason: " + Packet.Result.ToString(), Color.Red);
-				ConnectionManager.FailToCreateGameEventHandler failToCreateGameEvent = this.FailToCreateGameEvent;
-				if (failToCreateGameEvent != null)
-				{
-					failToCreateGameEvent();
-				}
-			}
+				this.Realm.WriteToLog("Game Creation Failed, Reason: " + Packet.Result, Color.Red);
+                this.FailToCreateGameEvent?.Invoke();
+            }
 		}
 
 		private void RealmSocket_OnDisconnected()
@@ -607,7 +583,7 @@ namespace BioBot
 			}
 		}
 
-		[DebuggerStepThrough, CompilerGenerated]
+		/*[DebuggerStepThrough, CompilerGenerated]
 		private void _Lambda$__1(int a0)
 		{
 			this.Game_PacketLost((GameServerPacket)a0);
@@ -617,6 +593,6 @@ namespace BioBot
 		private void _Lambda$__2(int a0)
 		{
 			this.Realm_PacketLost(checked((RealmServerPacket)a0));
-		}
+		}*/
 	}
 }
