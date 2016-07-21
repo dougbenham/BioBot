@@ -57,8 +57,6 @@ namespace BNSharp.MBNCSUtil.Util
                     cachedFiles.Add(completeFileList, ms);
 
                 str = ms;
-
-                File.WriteAllBytes("c:\\projects\\comparison.bin", data);
             }
 
             return str;

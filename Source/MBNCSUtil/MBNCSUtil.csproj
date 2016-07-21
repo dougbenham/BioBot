@@ -67,7 +67,9 @@
     <Compile Include="NLS.cs" />
     <Compile Include="OldAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources1.Designer.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\BigInteger.cs" />
     <Compile Include="Util\CheckRevisionCompiler.cs" />
     <Compile Include="Util\CheckRevisionFormulaTracker.cs" />
